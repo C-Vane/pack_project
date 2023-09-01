@@ -2,6 +2,9 @@ import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { AuthOptions } from 'next-auth';
 import DatabaseAdapter from '@/src/utils/db';
+import path from 'path';
+import { routes } from '@/src/utils/routes';
+import { theme } from '@/tailwind.config';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -24,11 +27,6 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: {
-          label: 'Username:',
-          type: 'text',
-          placeholder: 'Your user name',
-        },
         email: {
           label: 'E-mail:',
           type: 'email',
@@ -40,6 +38,7 @@ export const authOptions: AuthOptions = {
           placeholder: '**********',
         },
       },
+
       async authorize(credentials, req) {
         //TODO: Get user with provided credentials
         console.log(credentials);
@@ -54,4 +53,9 @@ export const authOptions: AuthOptions = {
   ],
   adapter: DatabaseAdapter(),
   debug: process.env.NODE_ENV === 'development',
+  // pages: {
+  //   signIn: routes.signin,
+  //   signOut: routes.home,
+  //   error: routes.error,
+  // },
 };
