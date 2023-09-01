@@ -37,9 +37,9 @@ The following packages and tools are used in this project:
 
   - ESLint is used to enforce code conventions and catch potential errors. It helps maintain code quality and consistency throughout the project.
 
-- Clark
+- Next-Auth
 
-  - Clark is used for authentication. It provides an out-of-the-box solution for authentication, eliminating the need to implement tokens, APIs, and components from scratch.
+  - Next-Auth is used for authentication. It provides an out-of-the-box solution for authentication, eliminating the need to implement tokens, APIs from scratch.
 
 - Tailwind CSS
 
