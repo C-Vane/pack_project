@@ -24,7 +24,7 @@ function Profile({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { id, image, bio, name, email } = user;
 
-  const { startUpload } = useUploadThing("media");
+  const { startUpload } = useUploadThing("profilePicture");
   const [fields, setFields] = useState<UserModifiableAttributes>({
     image: image || "",
     bio: bio || "",
@@ -42,7 +42,6 @@ function Profile({
 
   useEffect(() => {
     if (data.id) {
-
       setFields({
         image: data.image || "",
         bio: data.bio || "",
@@ -100,6 +99,7 @@ function Profile({
           src={profile}
           alt="meeting picture background"
           className="w-screen md:h-80 lg:h-96 object-cover object-[50%_60%]"
+          unoptimized
         />
 
         <form onSubmit={onSubmit} className="lg:justify-start">
@@ -109,6 +109,8 @@ function Profile({
                 src={fields.image || profilePlaceholder}
                 onError={(e) => (e.currentTarget.src = `${profilePlaceholder}`)}
                 alt="user profile picture"
+                width={200}
+                height={200}
                 className="h-full w-full rounded-full object-cover border-4 border-gray-600"
               />
 

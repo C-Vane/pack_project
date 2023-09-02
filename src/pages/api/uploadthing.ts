@@ -1,9 +1,8 @@
-import { createNextRouteHandler } from 'uploadthing/next';
-
 import { customApis } from '@/src/utils/routes';
 import { ourFileRouter } from '@/src/utils/upload';
+import { createNextPageApiHandler } from 'uploadthing/next-legacy';
 
-const handler = createNextRouteHandler({
+const handler = createNextPageApiHandler({
   router: ourFileRouter,
   config: {
     callbackUrl: customApis.imageUpload,

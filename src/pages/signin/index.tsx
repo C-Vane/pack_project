@@ -54,17 +54,17 @@ export default function SignIn({
             </h1>
             <div className="divide-y divide-gray-600">
               <CtaButton
-                text={`Sign in with ${providers.github.name}`}
+                text={`Sign in with ${providers?.github?.name}`}
                 type="submit"
                 className="my-6 w-full justify-center"
-                onClick={() => signIn(providers.github.id)}
+                onClick={() => signIn(providers?.github?.id)}
                 isSecondary
               />
 
               <form
                 className="space-y-4 md:space-y-6 pt-3"
                 method="post"
-                action={providers.email.signinUrl}
+                action={providers?.email?.signinUrl}
                 onSubmit={onSubmit}
               >
                 <InputField

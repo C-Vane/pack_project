@@ -57,6 +57,14 @@ To run this app locally, follow these steps:
 3. Start the development server using `npm run dev`.
 4. Open your browser and navigate to `http://localhost:3000` to access the app.
 
+### Learnings
+
+1. I should have used Cloudinary for image uploading instead of the UploadThing package. I've used Cloudinary before and it would have made the process easier.
+
+2. I realized that I don't enjoy working with Next.js as a full-stack framework. In the future, I might consider opting for a serverless architecture instead.
+
+3. I really liked using Vercel and Next.js for deployment. The process was smooth and hassle-free.
+
 ### Conclusion
 
 This web app aims to provide users with a seamless experience for managing their account information and profile image. By leveraging the power of Next.js, TypeScript, and other tools, we can ensure a robust and efficient solution.
