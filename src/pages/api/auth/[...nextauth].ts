@@ -13,12 +13,15 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
       async profile(profile) {
-        const user = await createUser({
-          name: profile.name,
-          email: profile.email,
-          externalId: profile.id,
-          image: profile.avatar_url,
-        });
+        const user = await createUser(
+          {
+            name: profile.name,
+            email: profile.email,
+            externalId: profile.id,
+            image: profile.avatar_url,
+          },
+          true
+        );
         return user;
       },
     }),

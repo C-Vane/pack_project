@@ -28,14 +28,10 @@ export const connectToDB = async () => {
   }
 };
 
-export const createUser = async ({
-  name,
-  email,
-  password,
-  externalId,
-  image,
-  bio,
-}: SignUpUser): Promise<DBUser> => {
+export const createUser = async (
+  { name, email, password, externalId, image, bio }: SignUpUser,
+  isOAuth?: boolean
+): Promise<DBUser> => {
   connectToDB();
   const existingUser = await User.findOne({ email }).select([
     '+password',
@@ -45,9 +41,9 @@ export const createUser = async ({
   const isPasswordCorrect =
     existingUser?.password && password
       ? await compare(password, existingUser.password)
-      : existingUser?.externalId === externalId;
+      : false;
 
-  if (existingUser instanceof User && isPasswordCorrect) {
+  if (existingUser instanceof User && (isPasswordCorrect || isOAuth)) {
     return Promise.resolve({
       email: existingUser.email,
       name: existingUser.name,
@@ -55,6 +51,10 @@ export const createUser = async ({
       image: existingUser.image,
       bio: existingUser.bio,
     });
+  }
+
+  if (existingUser) {
+    throw new Error('Existing user!');
   }
 
   if (password && password.length < 6) {
