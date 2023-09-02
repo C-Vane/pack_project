@@ -59,6 +59,7 @@ function Profile({
 
       if (hasImageChanged) {
         const response = await startUpload(files);
+
         if (response && response[0].url) {
           fileUrl = response[0].url;
         }
@@ -145,7 +146,7 @@ function Profile({
             </div>
           </div>
 
-          <div className=" bg-white rounded-lg shadow m-10 mt-5 w-80% h-max p-5">
+          <div className="flex flex-col max-w-xl lg:max-w-2xl m-auto bg-white rounded-lg shadow my-3 w-80% h-max p-5">
             <h2 className="mb-4 text-4xl font-bold tracking-tight  text-gray-900 md:text-5xl lg:text-6xl">
               Welcome to your Pack profile.
             </h2>
@@ -202,12 +203,13 @@ function Profile({
                 </p>
               </>
             )}
-            <CtaButton
-              type="submit"
-              text="Save"
-              disabled={isLoading || !isChanged}
-              className="mt-5 ml-auto justify-self-end"
-            />
+            <div className="flex justify-end">
+              <CtaButton
+                type="submit"
+                text="Save"
+                disabled={isLoading || !isChanged}
+              />
+            </div>
           </div>
         </form>
 
