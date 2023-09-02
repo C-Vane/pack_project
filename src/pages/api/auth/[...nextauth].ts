@@ -19,7 +19,6 @@ export const authOptions: AuthOptions = {
           externalId: profile.id,
           image: profile.avatar_url,
         });
-        console.log({ profile });
         return user;
       },
     }),

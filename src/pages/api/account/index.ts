@@ -25,8 +25,6 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       bio,
     });
 
-    console.log(user);
-
     return res.status(201).json({
       success: true,
       user,
