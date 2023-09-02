@@ -1,6 +1,7 @@
 import Image from "next/image";
 import homepageImage from "src/assets/images/homepage.png";
 import { routes } from "../utils/routes";
+import CtaButton from "../components/CtaButton";
 
 export default function Home() {
   return (
@@ -17,11 +18,7 @@ export default function Home() {
               world-star mentors.
             </p>
             <div className="mt-8">
-              <a href={routes.signin}>
-                <button className="bg-primary-500 hover:bg-white hover:text-primary-500 hover:border-primary-500 hover:border-2 focus:bg-white focus:text-black focus:border-secondary-500 focus:ring-secondary-500 inline-flex items-center px-7 py-3 text-sm text-neutralB font-bold bg-neutralB-700 border-2 border-transparent rounded-[10px] focus:outline-none focus:ring-2">
-                  Manage your account
-                </button>
-              </a>
+              <CtaButton to={routes.signin} text="Manage your account" />
             </div>
           </div>
         </div>

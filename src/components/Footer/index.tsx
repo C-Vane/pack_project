@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logo from "src/assets/logo/logo_w.png";
+import CtaButton from "../CtaButton";
 
 const Footer = () => {
   return (
@@ -16,9 +17,7 @@ const Footer = () => {
                   type="text"
                   placeholder="Email address"
                 />
-                <button className="px-8 py-2 border-primary-500 hover:bg-primary-500 hover:text-black border-2 rounded-[10px] ml-auto text-primary-500">
-                  Subscribe
-                </button>
+                <CtaButton text="Subscribe" />
               </div>
               <p className="text-[11px]">
                 By submitting your email, you agree to our
@@ -104,7 +103,7 @@ const Footer = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_108_1711)">
+                <g clipPath="url(#clip0_108_1711)">
                   <path
                     d="M29.5712 0H6.42884C2.87829 0 0 2.87829 0 6.42884V29.5712C0 33.1217 2.87829 36 6.42884 36H29.5712C33.1217 36 36 33.1217 36 29.5712V6.42884C36 2.87829 33.1217 0 29.5712 0Z"
                     fill="#EEEEF0"

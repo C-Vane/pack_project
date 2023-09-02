@@ -1,4 +1,4 @@
 {
   "css.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["nextjs", "tailwindcss", "uploadthing"]
+  "cSpell.words": ["nextjs", "signup", "tailwindcss", "uploadthing"]
 }

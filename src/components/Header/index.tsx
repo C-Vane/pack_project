@@ -1,8 +1,10 @@
 import { routes } from "@/src/utils/routes";
 import Image from "next/image";
 import logo from "src/assets/logo/logo_w.png";
+import CtaButton from "../CtaButton";
+import { signOut } from "next-auth/react";
 
-const Header = () => {
+const Header = ({ isSignedIn }: { isSignedIn?: boolean }) => {
   return (
     <header>
       <nav className="bg-black fixed w-full z-20 top-0 left-0 px-4 lg:px-6 py-2.5">
@@ -15,12 +17,20 @@ const Header = () => {
             />
           </a>
           <div className="flex md:order-2">
-            <a
-              href={routes.signin}
-              className="bg-secondary-500 hover:bg-white hover:text-secondary-500 hover:border-secondary-500 hover:border-2 focus:bg-white focus:border-primary-500 focus:ring-primary-500 focus:text-primary-500 inline-flex items-center px-7 py-3 text-sm text-neutralB font-bold bg-neutralB-700 border-2 border-transparent rounded-[10px] focus:outline-none focus:ring-2"
-            >
-              Login
-            </a>
+            {isSignedIn ? (
+              <CtaButton
+                text="Sign Out"
+                onClick={() =>
+                  signOut({ redirect: true, callbackUrl: routes.home })
+                }
+                isSecondary
+              />
+            ) : (
+              <>
+                <CtaButton text="Sign up" to={routes.signup} className="mr-5" />
+                <CtaButton text="Sign In" to={routes.signin} isSecondary />
+              </>
+            )}
           </div>
 
           <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
