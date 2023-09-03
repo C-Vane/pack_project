@@ -67,4 +67,4 @@ To run this app locally, follow these steps:
 
 ### Conclusion
 
-This web app aims to provide users with a seamless experience for managing their account information and profile image. By leveraging the power of Next.js, TypeScript, and other tools, we can ensure a robust and efficient solution.
+This web app aims to provide users with a seamless experience for managing their account information and profile images. By leveraging the power of Next.js, TypeScript, and other tools.
