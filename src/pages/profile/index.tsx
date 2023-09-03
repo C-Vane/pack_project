@@ -22,7 +22,12 @@ import CtaButton from "@/src/components/CtaButton";
 function Profile({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { id, image, bio, name, email } = user;
+  const [updateUser, data, isLoading, error] = useApi<
+    UserModifiableAttributes,
+    DBUser
+  >(customApis.account, FetchMethod.PATCH);
+
+  const { id, image, bio, name, email } = data.id ? data : user;
 
   const { startUpload } = useUploadThing("profilePicture");
   const [fields, setFields] = useState<UserModifiableAttributes>({
@@ -35,11 +40,6 @@ function Profile({
   const isChanged =
     fields.image !== image || fields.name !== name || fields.bio !== bio;
 
-  const [updateUser, data, isLoading, error] = useApi<
-    UserModifiableAttributes,
-    DBUser
-  >(customApis.account, FetchMethod.PATCH);
-
   useEffect(() => {
     if (data.id) {
       setFields({
@@ -47,6 +47,7 @@ function Profile({
         bio: data.bio || "",
         name: data.name || "",
       });
+      setFiles([]);
     }
   }, [data]);
 
@@ -79,9 +80,15 @@ function Profile({
 
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      setFiles(Array.from(e.target.files));
+      var blob = file.slice(0, file.size, "image/png");
 
-      if (!file.type.includes("image")) return;
+      if (!file.type.includes("image")) {
+        return;
+      }
+
+      const newFile = new File([blob], `${id}.png`, { type: "image/png" });
+
+      setFiles([newFile]);
 
       fileReader.onload = async (event) => {
         const imageDataUrl = event.target?.result?.toString() || "";
@@ -112,7 +119,7 @@ function Profile({
                 alt="user profile picture"
                 width={200}
                 height={200}
-                className="h-full w-full rounded-full object-cover border-4 border-gray-600"
+                className="h-full w-auto aspect-square rounded-full object-cover border-4 border-gray-600"
               />
 
               <label
