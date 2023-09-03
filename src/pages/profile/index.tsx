@@ -22,7 +22,7 @@ import CtaButton from "@/src/components/CtaButton";
 function Profile({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [updateUser, data, isLoading, error] = useApi<
+  const [updateUser, data, isDatabaseLoading, error] = useApi<
     UserModifiableAttributes,
     DBUser
   >(customApis.account, FetchMethod.PATCH);
@@ -39,6 +39,7 @@ function Profile({
     backgroundImage: backgroundImage || "",
   });
   const [files, setFiles] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(isDatabaseLoading);
 
   const isChanged =
     fields.image !== image ||
@@ -52,13 +53,16 @@ function Profile({
         image: data.image || "",
         bio: data.bio || "",
         name: data.name || "",
+        backgroundImage: data.backgroundImage || "",
       });
       setFiles([]);
+      setIsLoading(false);
     }
   }, [data]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     let profileUrl: string = image;
     let backgroundUrl: string = backgroundImage;
 
@@ -132,7 +136,6 @@ function Profile({
         } else {
           newFields.image = `${imageDataUrl}`;
         }
-        console.log(newFields);
         setFields(newFields);
       };
 
