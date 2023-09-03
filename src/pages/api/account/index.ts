@@ -16,13 +16,14 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(401).json('Unauthorized: Please log in.');
     }
 
-    const { name, image, bio } = JSON.parse(req.body);
+    const { name, image, bio, backgroundImage } = JSON.parse(req.body);
 
     const user = await updateUserAttributes({
       email: session.user.email,
       name,
       image,
       bio,
+      backgroundImage,
     });
 
     return res.status(201).json({

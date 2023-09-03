@@ -50,6 +50,7 @@ export const createUser = async (
       id: existingUser._id.toString(),
       image: existingUser.image,
       bio: existingUser.bio,
+      backgroundImage: existingUser.backgroundImage,
     });
   }
 
@@ -57,11 +58,11 @@ export const createUser = async (
     throw new Error('Existing user!');
   }
 
-  if (password && password.length < 6) {
+  if (password && password.length < 6 && !isOAuth) {
     throw new Error('Password should be 6 characters long');
   }
 
-  const hashedPassword = await Utils.hashPassword(password);
+  const hashedPassword = !isOAuth ? await Utils.hashPassword(password) : '';
 
   const user = await User.create({
     name,
@@ -82,6 +83,7 @@ export const createUser = async (
     id: user._id.toString(),
     image: user.image,
     bio: user.bio,
+    backgroundImage: user.backgroundImage,
   });
 };
 
@@ -102,6 +104,7 @@ export const signInUser = async ({
       id: user._id.toString(),
       image: user.image,
       bio: user.bio,
+      backgroundImage: user.backgroundImage,
     });
   }
 
@@ -119,6 +122,7 @@ export const getUser = async (id: string): Promise<DBUser> => {
       id: user._id.toString(),
       image: user.image,
       bio: user.bio,
+      backgroundImage: user.backgroundImage,
     });
   }
 
@@ -129,6 +133,7 @@ export const updateUserAttributes = async ({
   email,
   name,
   image,
+  backgroundImage,
   bio,
 }: UserModifiableAttributes & { email: string }): Promise<DBUser> => {
   connectToDB();
@@ -139,6 +144,7 @@ export const updateUserAttributes = async ({
       name,
       image,
       bio,
+      backgroundImage,
     },
     { new: true }
   );
@@ -153,6 +159,7 @@ export const updateUserAttributes = async ({
     id: updatedUser._id.toString(),
     image: updatedUser.image,
     bio: updatedUser.bio,
+    backgroundImage: updatedUser.backgroundImage,
   });
 };
 
@@ -195,5 +202,6 @@ export const updateUserPassword = async ({
     id: updatedUser._id.toString(),
     image: updatedUser.image,
     bio: updatedUser.bio,
+    backgroundImage: updatedUser.backgroundImage,
   });
 };

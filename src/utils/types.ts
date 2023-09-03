@@ -11,6 +11,7 @@ export interface DBUser {
   email: string;
   name: string;
   image: string;
+  backgroundImage: string;
   bio: string;
 }
 
@@ -27,4 +28,5 @@ export interface UserModifiableAttributes {
   image?: string;
   bio?: string;
   name?: string;
+  backgroundImage?: string;
 }

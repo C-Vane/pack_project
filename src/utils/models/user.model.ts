@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
     image: String,
+    backgroundImage: String,
     bio: String,
   },
   {
