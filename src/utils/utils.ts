@@ -4,9 +4,10 @@ const hashPassword = async (password?: string) => {
   return password ? await hash(password, 12) : undefined;
 };
 
-export const validateEmail = (email: string) => {
+export const isValidEmail = (email: string) => {
   const validRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
   if (!email) {
     return false;
   }
@@ -18,9 +19,8 @@ export function isBase64Image(imageData: string) {
   return base64Regex.test(imageData);
 }
 
-
 export const Utils = {
   hashPassword,
-  validateEmail,
+  isValidEmail,
   isBase64Image,
 };

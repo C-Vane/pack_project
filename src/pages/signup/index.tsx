@@ -45,6 +45,7 @@ export default function SignIn({
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const form = new FormData(e.target as HTMLFormElement);
 
     const data: { [key: string]: string } = {
@@ -71,7 +72,7 @@ export default function SignIn({
       err.name = "Name must be atleast 4 characters long";
     } else if (data.name?.length > 30) {
       err.name = "Name should be less than 30 characters";
-    } else if (!Utils.validateEmail(data.email)) {
+    } else if (!Utils.isValidEmail(data.email)) {
       err.email = "Invalid email";
     } else if (data.password?.length < 6) {
       err.password = "Password should be at least 6 characters long";
@@ -82,9 +83,9 @@ export default function SignIn({
     setValidationErrors(err);
 
     if (Object.keys(err).length === 0) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   };
 
